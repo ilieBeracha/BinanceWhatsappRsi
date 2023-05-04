@@ -1,13 +1,14 @@
 import express from "express";
 import cors from "cors";
-import { runEachMin } from "./rsi";
+import { runEach5Sec } from "./rsi";
 
 const app = express();
 
 app.use(cors());
 app.use(express.json());
 
-runEachMin();
+// runEachMin();
+runEach5Sec()
 
 
 app.listen(3333, () => {

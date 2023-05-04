@@ -1,6 +1,7 @@
 import Binance from "binance-api-node";
 import { RSI } from "technicalindicators";
-import cron from "node-cron";
+// import cron from "node-cron";
+import * as s from 'node-schedule'
 import { sendMessage } from "./twilio";
 
 const client = Binance();
@@ -49,9 +50,14 @@ async function getRsiByPair() {
   return rsiValues;
 }
 
-
-export function runEachMin() {
-  cron.schedule("* * * * *", () => {
+export function runEach5Sec() {
+  s.scheduleJob("*/5 * * * * *", () => {
     getRsiByPair();
   });
 }
+
+// export function runEachMin() {
+//   cron.schedule("* * * * *", () => {
+//     getRsiByPair();
+//   });
+// }
